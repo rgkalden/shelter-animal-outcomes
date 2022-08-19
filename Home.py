@@ -127,6 +127,16 @@ top_colors = train[train['AnimalType'] == 'Cat']['Color'].value_counts()[:5].ind
 #fig.show()
 
 
+# ### Sex
+
+
+fig_sex = px.histogram(train[train['AnimalType'] == 'Cat'], x="OutcomeType", color='sex', category_orders=category_orders)
+st.write(fig_sex)
+
+#fig = px.histogram(train[train['AnimalType'] == 'Cat'], x="sex")
+#fig.show()
+
+
 # ### Neutered
 
 
