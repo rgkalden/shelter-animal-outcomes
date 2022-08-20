@@ -5,14 +5,16 @@ import streamlit as st
 
 from functions import *
 
+st.set_page_config(page_title="Shelter Animal Outcomes", page_icon="🐾")
+
 st.title("Shelter Animal Outcomes 🐾")
 
-# ## Load Training Data
+# Load Training Data
 
 train = load_data('data/train.csv')
 
 
-# ## Clean Training Data
+# Clean Training Data
 
 
 drop_columns = ['SexuponOutcome', 'AgeuponOutcome', 'OutcomeSubtype']
@@ -20,17 +22,8 @@ drop_columns = ['SexuponOutcome', 'AgeuponOutcome', 'OutcomeSubtype']
 clean_data(train, drop_columns)
 
 
-# st.write(train)
+# Overall
 
-
-# ## Visualizations
-
-
-# ### Overall
-
-
-#fig = px.histogram(train, x="AnimalType")
-# fig.show()
 
 category_orders = dict(
     OutcomeType=['Return_to_owner', 'Adoption', 'Transfer', 'Euthanasia', 'Died'])
@@ -38,72 +31,7 @@ category_orders = dict(
 fig_overall_outcomes = px.histogram(train, x="OutcomeType", color='AnimalType')
 st.write(fig_overall_outcomes)
 
-
-fig_overall_date = px.histogram(train[train['AnimalType'] == 'Cat'],
-                                x="DateTime", color='OutcomeType', category_orders=category_orders)
-st.write(fig_overall_date)
+st.write(train)
 
 
-# ### Breed
 
-
-fig_breed = px.histogram(train[train['AnimalType'] == 'Cat'],
-                         x="OutcomeType", color='Breed', category_orders=category_orders)
-st.write(fig_breed)
-
-
-top_breeds = train[train['AnimalType'] == 'Cat']['Breed'].value_counts()[
-    :5].index.to_list()
-
-#fig = px.histogram(train[train['Breed'].isin(top_breeds)], x="Breed")
-# fig.show()
-
-
-# ### Color
-
-
-fig_color = px.histogram(train[train['AnimalType'] == 'Cat'],
-                         x="OutcomeType", color='Color', category_orders=category_orders)
-st.write(fig_color)
-
-
-top_colors = train[train['AnimalType'] == 'Cat']['Color'].value_counts()[
-    :5].index.to_list()
-
-#fig = px.histogram(train[train['Color'].isin(top_colors)], x="Color")
-# fig.show()
-
-
-# ### Sex
-
-
-fig_sex = px.histogram(train[train['AnimalType'] == 'Cat'],
-                       x="OutcomeType", color='sex', category_orders=category_orders)
-st.write(fig_sex)
-
-#fig = px.histogram(train[train['AnimalType'] == 'Cat'], x="sex")
-# fig.show()
-
-
-# ### Neutered
-
-
-fig_neutered = px.histogram(train[train['AnimalType'] == 'Cat'],
-                            x="OutcomeType", color='neutered', category_orders=category_orders)
-st.write(fig_neutered)
-
-
-#fig = px.histogram(train[train['AnimalType'] == 'Cat'], x="neutered")
-# fig.show()
-
-
-# ### Age
-
-
-fig_age = px.histogram(train[train['AnimalType'] == 'Cat'], x="OutcomeType",
-                       color='age_category', category_orders=category_orders)
-st.write(fig_age)
-
-
-#fig = px.histogram(train[train['AnimalType'] == 'Dog'], x='age_category')
-# fig.show()
