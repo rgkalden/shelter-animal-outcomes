@@ -31,7 +31,7 @@ train = train[train['AnimalType'].isin(animal_selection)]
 
 
 # Date
-st.subheader('Date')
+st.header('Date')
 
 fig_overall_date = px.histogram(train,
                                 x="DateTime", color='OutcomeType', category_orders=category_orders)
@@ -39,60 +39,69 @@ st.write(fig_overall_date)
 
 
 # Breed
-st.subheader('Breed')
+st.header('Breed')
 
 fig_breed = px.histogram(train,
-                         x="OutcomeType", color='Breed', category_orders=category_orders)
+                        x="OutcomeType", color='Breed', category_orders=category_orders)
 st.write(fig_breed)
 
 
-top_breeds = train['Breed'].value_counts()[
-    :5].index.to_list()
+top_breeds = train['Breed'].value_counts()[:5].index.to_list()
+st.write('Most common breeds')
+st.subheader(', '.join(top_breeds))
 
-#fig = px.histogram(train[train['Breed'].isin(top_breeds)], x="Breed")
-# fig.show()
+
 
 
 # Color
-st.subheader('Color')
+st.header('Color')
 
 fig_color = px.histogram(train,
                          x="OutcomeType", color='Color', category_orders=category_orders)
 st.write(fig_color)
 
 
-top_colors = train['Color'].value_counts()[
-    :5].index.to_list()
-
-#fig = px.histogram(train[train['Color'].isin(top_colors)], x="Color")
-# fig.show()
+top_colors = train['Color'].value_counts()[:5].index.to_list()
+st.write('Most common colors')
+st.subheader(', '.join(top_colors))
 
 
 # Sex
-st.subheader('Sex')
+st.header('Sex')
 
 fig_sex = px.histogram(train,
                        x="OutcomeType", color='sex', category_orders=category_orders)
 st.write(fig_sex)
 
-#fig = px.histogram(train[train, x="sex")
-# fig.show()
+num_male = len(train[train['sex'] == 'male'])
+num_female = len(train[train['sex'] == 'female'])
+num_unk = len(train) - num_male - num_female
+
+col1, col2, col3 = st.columns(3)
+col1.metric("Female", num_female)
+col2.metric("Male", num_male)
+col3.metric("Unknown", num_unk)
 
 
 # Neutered
-st.subheader('Neutered')
+st.header('Neutered')
 
 fig_neutered = px.histogram(train,
                             x="OutcomeType", color='neutered', category_orders=category_orders)
 st.write(fig_neutered)
 
+num_neutered = len(train[train['neutered'] == 'neutered'])
+num_intact = len(train[train['neutered'] == 'intact'])
+num_unk_neu = len(train) - num_neutered - num_intact
 
-#fig = px.histogram(train[train, x="neutered")
-# fig.show()
+col1, col2, col3 = st.columns(3)
+col1.metric("Neutered", num_neutered)
+col2.metric("Intact", num_intact)
+col3.metric("Unknown", num_unk_neu)
 
 
 # Age
-st.subheader('Age')
+st.header('Age')
 
 fig_age = px.histogram(train, x="OutcomeType",
                        color='age_category', category_orders=category_orders)
@@ -108,5 +117,5 @@ age_category
 ''')
 
 
-#fig = px.histogram(train[train['AnimalType'] == 'Dog'], x='age_category')
-# fig.show()
+fig_age_category = px.histogram(train, x='age_category', color='AnimalType')
+st.write(fig_age_category)
