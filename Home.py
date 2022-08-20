@@ -39,6 +39,14 @@ train = train[(train['DateTime'] >= pd.Timestamp(start_date)) & (train['DateTime
 fig_overall_outcomes = px.histogram(train, x="OutcomeType", color='AnimalType')
 st.write(fig_overall_outcomes)
 
+num_cats = len(train[train['AnimalType'] == 'Cat'])
+num_dogs = len(train) - num_cats
+
+col1, col2 = st.columns(2)
+col1.metric("Cats", num_cats)
+col2.metric("Dogs", num_dogs)
+
+st.subheader('Dataset')
 st.write(train)
 
 
