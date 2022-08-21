@@ -10,6 +10,9 @@ st.set_page_config(page_title="Shelter Animal Outcomes", page_icon="🐾")
 
 st.title("Shelter Animal Outcomes 🐾")
 
+with st.expander('About this Dashboard'):
+    st.write('Placeholder')
+
 # Load Training Data
 
 train = load_data('data/train.csv')

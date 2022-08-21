@@ -107,9 +107,9 @@ fig_age = px.histogram(train, x="OutcomeType",
                        color='age_category', category_orders=category_orders)
 st.write(fig_age)
 
-st.write('''
+st.caption('''
 
-age_category 
+Note: Age categories are defined as: 
 < 3: young,
 < 5: middle,
 < 10: adult, > 10: old
