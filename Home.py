@@ -37,17 +37,41 @@ end_date = st.sidebar.date_input("End Date", datetime_max)
 
 train = train[(train['DateTime'] >= pd.Timestamp(start_date)) & (train['DateTime'] <= pd.Timestamp(end_date))]
 
+animal_categories = train['AnimalType'].unique().tolist()
+animal_selection = st.sidebar.multiselect('Choose animal types', animal_categories, animal_categories)
+train = train[train['AnimalType'].isin(animal_selection)]
+
 # Overall
 
 fig_overall_outcomes = px.histogram(train, x="OutcomeType", color='AnimalType')
 st.write(fig_overall_outcomes)
 
-num_cats = len(train[train['AnimalType'] == 'Cat'])
-num_dogs = len(train) - num_cats
+num_positive = len(train[train['OutcomeType'].isin(['Return_to_owner', 'Adoption'])])
+kpi_positive = round(num_positive / len(train) * 100, 1)
 
-col1, col2 = st.columns(2)
-col1.metric("Cats", num_cats)
-col2.metric("Dogs", num_dogs)
+st.sidebar.metric("Positive Outcomes", str(kpi_positive) + "%", help='KPI representing the percentage of positive outcomes (return to owner or adoption).')
+
+num_returned = len(train[train['OutcomeType'].isin(['Return_to_owner'])])
+kpi_returned = round(num_returned / len(train) * 100, 1)
+
+num_adopted = len(train[train['OutcomeType'].isin(['Adoption'])])
+kpi_adopted = round(num_adopted / len(train) * 100, 1)
+
+num_transferred = len(train[train['OutcomeType'].isin(['Transfer'])])
+kpi_transferred = round(num_transferred / len(train) * 100, 1)
+
+num_euthanized = len(train[train['OutcomeType'].isin(['Euthanasia'])])
+kpi_euthanized = round(num_euthanized / len(train) * 100, 1)
+
+num_died = len(train[train['OutcomeType'].isin(['Died'])])
+kpi_died = round(num_died / len(train) * 100, 1)
+
+col1, col2, col3, col4, col5 = st.columns(5)
+col1.metric("Returned to owner", str(kpi_returned) + "%", help='KPI representing the percentage of animals returned to their owner.')
+col2.metric("Adopted", str(kpi_adopted) + "%", help='KPI representing the percentage of animals that have been adopted.')
+col3.metric("Transferred", str(kpi_transferred) + "%", help="KPI representing the percentage of animals transferred to another shelter." )
+col4.metric("Euthanized", str(kpi_euthanized) + "%", help="KPI representing the percentage of animals that have been euthanized.")
+col5.metric("Died", str(kpi_died) + "%", help="KPI representing the percentage of animals that have died while staying at the shelter.")
 
 st.subheader('Dataset')
 st.write(train)
