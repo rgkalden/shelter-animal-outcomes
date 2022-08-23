@@ -74,69 +74,76 @@ with tab1:
 
 with tab2:
 
-    col1, col2 = st.columns(2)
-    with col1:
-        # AnimalType_Dog
+    with st.form('ml_feat_values'):
+        col1, col2 = st.columns(2)
+        with col1:
+            # AnimalType_Dog
 
-        animal_type = st.selectbox('Animal Type', ('Dog', 'Cat'), index=0)
-        if animal_type == 'Dog':
-            AnimalType_Dog = 1
-        else:
-            AnimalType_Dog = 0
+            animal_type = st.selectbox('Animal Type', ('Dog', 'Cat'), index=0)
+            if animal_type == 'Dog':
+                AnimalType_Dog = 1
+            else:
+                AnimalType_Dog = 0
 
-    with col2:
-        # sex_male
+        with col2:
+            # sex_male
 
-        sex_type = st.selectbox('Animal Sex', ('Male', 'Female'), index=1)
-        if sex_type == 'Male':
-            sex_male = 1
-        else:
-            sex_male = 0
+            sex_type = st.selectbox('Animal Sex', ('Male', 'Female'), index=1)
+            if sex_type == 'Male':
+                sex_male = 1
+            else:
+                sex_male = 0
 
-    col3, col4 = st.columns(2)
-    with col3:
-        # age_years
+        col3, col4 = st.columns(2)
+        with col3:
+            # age_years
 
-        age_years = st.number_input('Age (years)', max_value=100., min_value=0., value=0.833, step=0.5)
+            age_years = st.number_input('Age (years)', max_value=100., min_value=0., value=0.833, step=0.5)
 
-    with col4:
-        # month
+        with col4:
+            # month
 
-        month = st.number_input('Month when outcome will occur (1-12)', min_value=1, max_value=12, step=1, value=10)
-
-
-    col5, col6, col7 = st.columns(3)
-    with col5:
-    # breed_mix
-
-        breed_bool = st.checkbox('Mixed Breed', value=True)
-        if breed_bool:
-            breed_mix = 1
-        else:
-            breed_mix = 0
-
-    with col6:
-    # color_single
-
-        color_bool = st.checkbox('Single Color', value=False)
-        if color_bool:
-            color_single = 1
-        else:
-            color_single = 0
-
-    with col7:
-        # neutered_neutered
-
-        neutered_bool = st.checkbox('Neutered', value=False)
-        if neutered_bool:
-            neutered_neutered = 1
-        else:
-            neutered_neutered = 0
+            month = st.number_input('Month when outcome will occur (1-12)', min_value=1, max_value=12, step=1, value=10)
 
 
-    feature_values = [age_years, month, breed_mix, color_single, AnimalType_Dog, sex_male, neutered_neutered]
+        col5, col6, col7 = st.columns(3)
+        with col5:
+        # breed_mix
 
-    prediction = single_animal_prediction(feature_values, model_filename='gbc_model.joblib')
-    prediction_string = ''.join(prediction)
+            breed_bool = st.checkbox('Mixed Breed', value=True)
+            if breed_bool:
+                breed_mix = 1
+            else:
+                breed_mix = 0
 
-    st.metric('Predicted Outcome', prediction_string, help='Outcome predicted with Machine Learning, based on the values entered above.')
+        with col6:
+        # color_single
+
+            color_bool = st.checkbox('Single Color', value=False)
+            if color_bool:
+                color_single = 1
+            else:
+                color_single = 0
+
+        with col7:
+            # neutered_neutered
+
+            neutered_bool = st.checkbox('Neutered', value=False)
+            if neutered_bool:
+                neutered_neutered = 1
+            else:
+                neutered_neutered = 0
+
+        submit_button = st.form_submit_button(label='Submit')
+        
+    if submit_button:
+
+        feature_values = [age_years, month, breed_mix, color_single, AnimalType_Dog, sex_male, neutered_neutered]
+
+        prediction = single_animal_prediction(feature_values, model_filename='gbc_model.joblib')
+    
+        prediction_string = ''.join(prediction)
+
+        st.metric('Predicted Outcome', prediction_string, help='Outcome predicted with Machine Learning, based on the values entered above.')
+
+            
