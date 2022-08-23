@@ -46,25 +46,9 @@ train = train[train['AnimalType'].isin(animal_selection)]
 fig_overall_outcomes = px.histogram(train, x="OutcomeType", color='AnimalType')
 st.write(fig_overall_outcomes)
 
-num_positive = len(train[train['OutcomeType'].isin(['Return_to_owner', 'Adoption'])])
-kpi_positive = round(num_positive / len(train) * 100, 1)
+kpi_positive, kpi_returned, kpi_adopted, kpi_transferred, kpi_euthanized, kpi_died = calculate_metrics(train)
 
 st.sidebar.metric("Positive Outcomes", str(kpi_positive) + "%", help='KPI representing the percentage of positive outcomes (return to owner or adoption).')
-
-num_returned = len(train[train['OutcomeType'].isin(['Return_to_owner'])])
-kpi_returned = round(num_returned / len(train) * 100, 1)
-
-num_adopted = len(train[train['OutcomeType'].isin(['Adoption'])])
-kpi_adopted = round(num_adopted / len(train) * 100, 1)
-
-num_transferred = len(train[train['OutcomeType'].isin(['Transfer'])])
-kpi_transferred = round(num_transferred / len(train) * 100, 1)
-
-num_euthanized = len(train[train['OutcomeType'].isin(['Euthanasia'])])
-kpi_euthanized = round(num_euthanized / len(train) * 100, 1)
-
-num_died = len(train[train['OutcomeType'].isin(['Died'])])
-kpi_died = round(num_died / len(train) * 100, 1)
 
 col1, col2, col3, col4, col5 = st.columns(5)
 col1.metric("Returned to owner", str(kpi_returned) + "%", help='KPI representing the percentage of animals returned to their owner.')

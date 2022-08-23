@@ -66,3 +66,26 @@ def clean_data(dataframe, drop_columns):
     dataframe['DateTime'] = pd.to_datetime(dataframe['DateTime'])
 
     dataframe.drop(drop_columns, axis=1, inplace=True)
+
+
+def calculate_metrics(dataframe):
+
+    num_positive = len(dataframe[dataframe['OutcomeType'].isin(['Return_to_owner', 'Adoption'])])
+    kpi_positive = round(num_positive / len(dataframe) * 100, 1)
+
+    num_returned = len(dataframe[dataframe['OutcomeType'].isin(['Return_to_owner'])])
+    kpi_returned = round(num_returned / len(dataframe) * 100, 1)
+
+    num_adopted = len(dataframe[dataframe['OutcomeType'].isin(['Adoption'])])
+    kpi_adopted = round(num_adopted / len(dataframe) * 100, 1)
+
+    num_transferred = len(dataframe[dataframe['OutcomeType'].isin(['Transfer'])])
+    kpi_transferred = round(num_transferred / len(dataframe) * 100, 1)
+
+    num_euthanized = len(dataframe[dataframe['OutcomeType'].isin(['Euthanasia'])])
+    kpi_euthanized = round(num_euthanized / len(dataframe) * 100, 1)
+
+    num_died = len(dataframe[dataframe['OutcomeType'].isin(['Died'])])
+    kpi_died = round(num_died / len(dataframe) * 100, 1)
+
+    return kpi_positive, kpi_returned, kpi_adopted, kpi_transferred, kpi_euthanized, kpi_died
