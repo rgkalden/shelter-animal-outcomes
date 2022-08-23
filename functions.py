@@ -89,3 +89,56 @@ def calculate_metrics(dataframe):
     kpi_died = round(num_died / len(dataframe) * 100, 1)
 
     return kpi_positive, kpi_returned, kpi_adopted, kpi_transferred, kpi_euthanized, kpi_died
+
+def get_quarter(timestamp):
+    month = timestamp.month
+
+    if month <= 3:
+        return 1
+    elif month <= 6:
+        return 2
+    elif month <= 9:
+        return 3
+    elif month <= 12:
+        return 4
+
+def get_month(timestamp):
+    return timestamp.month
+    
+def get_breed_mix(string):
+    string = str(string)
+    if string.find('Mix') >= 0 or string.find('/') >= 0:
+        return 1
+    else:
+        return 0
+
+def get_single_color(string):
+    string = str(string)
+    if string.find('/') >= 0:
+        return 0
+    else:
+        return 1
+
+def data_preparation(df, drop_extra_columns):
+
+    dataframe = df.copy()
+
+    #dataframe['has_name'] = dataframe['Name']
+    #dataframe['has_name'].fillna(0, inplace=True)
+    #dataframe['has_name'] = dataframe['has_name'].apply(lambda x: 1 if x != 0 else x)
+
+    #dataframe['quarter'] = dataframe['DateTime'].apply(get_quarter)
+
+    dataframe['month'] = dataframe['DateTime'].apply(get_month)
+
+    dataframe['breed_mix'] = dataframe['Breed'].apply(get_breed_mix)
+
+    dataframe['color_single'] = dataframe['Color'].apply(get_single_color)
+
+    dataframe.drop(drop_extra_columns, axis=1, inplace=True)
+
+    dataframe = pd.get_dummies(dataframe, columns=['AnimalType', 'sex', 'neutered'], drop_first=True)
+
+    dataframe.drop(['sex_unknown', 'neutered_unknown'], axis=1, inplace=True)
+
+    return dataframe
