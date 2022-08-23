@@ -97,7 +97,7 @@ with tab2:
     with col3:
         # age_years
 
-        age_years = st.number_input('Age (years)', max_value=100., min_value=0., value=0.833)
+        age_years = st.number_input('Age (years)', max_value=100., min_value=0., value=0.833, step=0.5)
 
     with col4:
         # month
