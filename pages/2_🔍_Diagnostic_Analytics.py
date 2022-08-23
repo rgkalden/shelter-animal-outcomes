@@ -4,9 +4,26 @@ import streamlit as st
 
 from functions import *
 
+st.title('Diagnostic Analytics')
+
+with st.expander('About this Section'):
+    st.write('''
+    
+    In this section, data is presented in order to reveal any patterns in
+    animal outcomes. Features of the data are shown to explore whether
+    or not they influence the type of outcome.    
+    
+    ''')
+
+
+# Load Training Data
+
+
 train = load_data('data/train.csv')
 
 drop_columns = ['SexuponOutcome', 'AgeuponOutcome', 'OutcomeSubtype']
+
+# Clean Data
 
 clean_data(train, drop_columns)
 

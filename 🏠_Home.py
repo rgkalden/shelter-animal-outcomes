@@ -11,7 +11,26 @@ st.set_page_config(page_title="Shelter Animal Outcomes", page_icon="🐾")
 st.title("Shelter Animal Outcomes 🐾")
 
 with st.expander('About this Dashboard'):
-    st.write('Placeholder')
+    st.write('''
+    
+    Welcome to the Shelter Animal Outcomes Dashboard!
+
+    There are several pages to this dashboard, each answering a certain question
+    about data related to the outcomes of shelter animals.
+
+    - 🏠 Home: What have been the outcomes in the past? (Descriptive Analytics)
+    - 🔍 Diagnostic Analytics: What are the reasons for these outcomes?
+    - 📈 Predictive Analytics: What will the outcomes be in the future?
+    - 🧠 ML Predictions: What outcome is predicted to happen for certain animal (Prescriptive Analytics)?
+    
+    Hints:
+
+    - Graphs are interactive. Feel free to hover your mouse for more information, or click and drag to zoom in.
+        Tables are also interactive and can be sorted by clicking on column headers.
+    - Pages can have data filters in the sidebar to the left, to further drill down by animal type or date range.
+    - Additional Hints for more specific information are also provided on their respective pages.
+
+    ''')
 
 # Load Training Data
 

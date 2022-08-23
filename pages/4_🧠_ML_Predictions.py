@@ -8,7 +8,20 @@ from functions import *
 st.title("ML Predictions")
 
 with st.expander('About this Section'):
-    st.write('Placeholder')
+    st.write('''
+    
+    In this section, machine learning is used to predict what the outcome
+    will be for animals that arrive at the shelter. There are two applications
+    of machine learning, that can be viewed in each tab below:
+
+    - Batch Prediction: For illustration purposes, predictions are made on a
+    sample batch of animals. Descriptive analytics for the overall outcomes 
+    are displayed.
+    - Single Animal Prediction: A form can be filled out with information
+    for a single animal, and then a prediction for the outcome will be made.
+    
+    
+    ''')
 
 
 
