@@ -1,5 +1,6 @@
-
+import numpy as np
 import pandas as pd
+from joblib import load
 
 def load_data(filename):
     return pd.read_csv(filename)
@@ -104,7 +105,7 @@ def get_quarter(timestamp):
 
 def get_month(timestamp):
     return timestamp.month
-    
+
 def get_breed_mix(string):
     string = str(string)
     if string.find('Mix') >= 0 or string.find('/') >= 0:
@@ -142,3 +143,13 @@ def data_preparation(df, drop_extra_columns):
     dataframe.drop(['sex_unknown', 'neutered_unknown'], axis=1, inplace=True)
 
     return dataframe
+
+
+def single_animal_prediction(feature_values, model_filename):
+    feature_array = np.array(feature_values).reshape(1, -1)
+
+    model = load(model_filename)
+
+    prediction = model.predict(feature_array)
+
+    return prediction
