@@ -20,8 +20,8 @@ with st.expander('About this Dashboard'):
 
     - 🏠 Home: What have been the outcomes in the past? (Descriptive Analytics)
     - 🔍 Diagnostic Analytics: What are the reasons for these outcomes?
-    - 📈 Predictive Analytics: What will the outcomes be in the future?
-    - 🧠 ML Predictions: What outcome is predicted to happen for certain animal (Prescriptive Analytics)?
+
+    - 🧠 ML Predictions: What outcome is predicted to happen for a particular animal (Prescriptive Analytics)?
     
     Hints:
 
@@ -31,6 +31,7 @@ with st.expander('About this Dashboard'):
     - Additional Hints for more specific information are also provided on their respective pages.
 
     ''')
+#     - 📈 Predictive Analytics: What will the outcomes be in the future?
 
 # Load Training Data
 
