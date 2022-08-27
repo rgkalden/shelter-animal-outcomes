@@ -152,4 +152,6 @@ def single_animal_prediction(feature_values, model_filename):
 
     prediction = model.predict(feature_array)
 
-    return prediction
+    probs = model.predict_proba(feature_array)
+
+    return prediction, probs

@@ -140,10 +140,21 @@ with tab2:
 
         feature_values = [age_years, month, breed_mix, color_single, AnimalType_Dog, sex_male, neutered_neutered]
 
-        prediction = single_animal_prediction(feature_values, model_filename='gbc_model.joblib')
+        prediction, probs = single_animal_prediction(feature_values, model_filename='gbc_model.joblib')
     
         prediction_string = ''.join(prediction)
 
-        st.metric('Predicted Outcome', prediction_string, help='Outcome predicted with Machine Learning, based on the values entered above.')
+        probs_dict = {'Return_to_owner':probs[0][3], 
+              'Adoption':probs[0][0],
+              'Transfer':probs[0][4],
+              'Euthanasia':probs[0][2],
+              'Died':probs[0][1]
+            }
 
-            
+        prob_string = str(round(probs_dict[prediction_string] * 100, 1)) + '%'
+        
+        col1, col2 = st.columns(2)
+        col1.metric('Predicted Outcome', prediction_string, help='Outcome predicted with Machine Learning, based on the values entered above.')
+
+        col2.metric('Probability', prob_string, help='Probability of the predicted outcome for the animal.')    
+
