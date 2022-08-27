@@ -42,11 +42,18 @@ with tab1:
     results = test.copy()
     results['OutcomeType'] = predictions
 
-    # Filters in Sidebar
+    # Filters and Metric
 
-    animal_categories = results['AnimalType'].unique().tolist()
-    animal_selection = st.sidebar.multiselect('Choose animal types', animal_categories, animal_categories)
-    results = results[results['AnimalType'].isin(animal_selection)]
+    col1, col2 = st.columns((2,1))
+    with col1:
+        animal_categories = results['AnimalType'].unique().tolist()
+        animal_selection = st.multiselect('Choose animal types', animal_categories, animal_categories, key='A')
+        results = results[results['AnimalType'].isin(animal_selection)]
+
+    with col2:
+        kpi_positive, kpi_returned, kpi_adopted, kpi_transferred, kpi_euthanized, kpi_died = calculate_metrics(results)
+
+        st.metric("Positive Outcomes", str(kpi_positive) + "%", help='KPI representing the percentage of positive outcomes (return to owner or adoption).')
 
     # Plot Results
 
@@ -56,10 +63,6 @@ with tab1:
     st.write(fig_predictions)
 
     # Metrics
-
-    kpi_positive, kpi_returned, kpi_adopted, kpi_transferred, kpi_euthanized, kpi_died = calculate_metrics(results)
-
-    st.sidebar.metric("Positive Outcomes", str(kpi_positive) + "%", help='KPI representing the percentage of positive outcomes (return to owner or adoption).')
 
     col1, col2, col3, col4, col5 = st.columns(5)
     col1.metric("Returned to owner", str(kpi_returned) + "%", help='KPI representing the percentage of animals returned to their owner.')
