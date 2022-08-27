@@ -79,7 +79,7 @@ with tab2:
         with col1:
             # AnimalType_Dog
 
-            animal_type = st.selectbox('Animal Type', ('Dog', 'Cat'), index=0)
+            animal_type = st.selectbox('Animal Type', ('Dog', 'Cat'), index=1)
             if animal_type == 'Dog':
                 AnimalType_Dog = 1
             else:
@@ -98,12 +98,12 @@ with tab2:
         with col3:
             # age_years
 
-            age_years = st.number_input('Age (years)', max_value=100., min_value=0., value=0.833, step=0.5)
+            age_years = st.number_input('Age (years)', max_value=100., min_value=0., value=0.5, step=0.5)
 
         with col4:
             # month
 
-            month = st.number_input('Month when outcome will occur (1-12)', min_value=1, max_value=12, step=1, value=10)
+            month = st.number_input('Month when outcome will occur (1-12)', min_value=1, max_value=12, step=1, value=8)
 
 
         col5, col6, col7 = st.columns(3)
@@ -128,7 +128,7 @@ with tab2:
         with col7:
             # neutered_neutered
 
-            neutered_bool = st.checkbox('Neutered', value=False)
+            neutered_bool = st.checkbox('Neutered', value=True)
             if neutered_bool:
                 neutered_neutered = 1
             else:
