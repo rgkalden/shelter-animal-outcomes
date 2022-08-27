@@ -51,8 +51,8 @@ clean_data(train, drop_columns)
 datetime_min = train['DateTime'].min()
 datetime_max = train['DateTime'].max()
 
-start_date = st.sidebar.date_input("Start Date", datetime_min, min_value=datetime_min, max_value=datetime_max-1)
-end_date = st.sidebar.date_input("End Date", datetime_max, min_value=datetime_min+1, max_value=datetime_max)
+start_date = st.sidebar.date_input("Start Date", datetime_min, min_value=datetime_min, max_value=datetime_max)
+end_date = st.sidebar.date_input("End Date", datetime_max, min_value=datetime_min, max_value=datetime_max)
 
 
 train = train[(train['DateTime'] >= pd.Timestamp(start_date)) & (train['DateTime'] <= pd.Timestamp(end_date))]
