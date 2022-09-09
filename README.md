@@ -9,7 +9,7 @@ Welcome to the repository for the Shelter Animal Outcomes dashboard web app!
 The goal of this dashboard app is to develop the concept of how outcomes for shelter animals can be improved by using analytics and machine learning. KPI's for animal shelter performance along with descriptive analytics are used to provide a description of the historical animal outcomes
 at the shelter. Diagnostic analytics are used to provide insight into what features of the animals lead to certain outcomes. Machine learning is used to make predictions for what the outcome will be for new animals that arrive at the shelter.
 
-By applying analytics and machine learning capabilities into this dahboard app, it is hoped that the information about animal outcomes is presented in a way that allows animal shelter employees to better understand what is happening at their shelter and what leads to certain types of outcomes for the animals.
+By applying analytics and machine learning capabilities into this dashboard app, it is hoped that the information about animal outcomes is presented in a way that allows animal shelter employees to better understand what is happening at their shelter and what leads to certain types of outcomes for the animals.
 
 > In the future, it is planned to add a page for Predictive Analytics, to forecast animal outcomes in the future, to help the shelter plan for demands in advance.
 
@@ -26,6 +26,8 @@ The notebook `model_development.ipynb` contains Python code to explore the datas
 
 * `data\train.csv`
 * `data\test.csv`
+
+`train.csv` is used when displaying analytics, and is split into train/test sets for machine learning. `test.csv` is used as a fresh data set representing a new batch of animals arriving at the animal shelter in the "Batch Predictions" ML section. The reason for utilizing the data files in this way is because of the way it is formatted - for the Kaggle competition, `test.csv` contains no labels, and therefore a test set had to be created from the `train.csv` file for machine learning.
 
 ## Run the App Locally
 
