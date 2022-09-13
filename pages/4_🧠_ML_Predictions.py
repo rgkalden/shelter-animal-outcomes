@@ -14,68 +14,18 @@ with st.expander('About this Section'):
     will be for animals that arrive at the shelter. There are two applications
     of machine learning, that can be viewed in each tab below:
 
-    - Batch Prediction: For illustration purposes, predictions are made on a sample 
-      batch of animals. Descriptive analytics for the overall outcomes are displayed.  
     - Single Animal Prediction: A form can be filled out with information for a single
       animal, and then a prediction for the outcome will be made.
-    
+    - Batch Prediction: For illustration purposes, predictions are made on a sample 
+      batch of animals. Descriptive analytics for the overall outcomes are displayed.
     
     ''')
 
 
 
-tab1, tab2 = st.tabs(['Batch Prediction', 'Single Animal Prediction'])
+tab1, tab2 = st.tabs([ 'Single Animal Prediction', 'Batch Prediction'])
 
 with tab1:
-    test = load_data('data/test.csv')
-    drop_columns = ['SexuponOutcome', 'AgeuponOutcome']
-    clean_data(test, drop_columns)
-    drop_extra_columns = ['ID', 'Name', 'DateTime', 'Breed', 'Color', 'age_category']
-
-
-    test_prepared = data_preparation(test, drop_extra_columns)
-
-    model = load('gbc_model.joblib')
-
-    predictions = model.predict(test_prepared)
-
-    results = test.copy()
-    results['OutcomeType'] = predictions
-
-    # Filters and Metric
-
-    col1, col2 = st.columns((2,1))
-    with col1:
-        animal_categories = results['AnimalType'].unique().tolist()
-        animal_selection = st.multiselect('Choose animal types', animal_categories, animal_categories, key='A')
-        results = results[results['AnimalType'].isin(animal_selection)]
-
-    with col2:
-        kpi_positive, kpi_returned, kpi_adopted, kpi_transferred, kpi_euthanized, kpi_died = calculate_metrics(results)
-
-        st.metric("Positive Outcomes", str(kpi_positive) + "%", help='KPI representing the percentage of positive outcomes (return to owner or adoption).')
-
-    # Plot Results
-
-    category_orders=dict(OutcomeType=['Return_to_owner', 'Adoption', 'Transfer', 'Euthanasia', 'Died'])
-    fig_predictions = px.histogram(results, x="OutcomeType", color='AnimalType', category_orders=category_orders)
-
-    st.write(fig_predictions)
-
-    # Metrics
-
-    col1, col2, col3, col4, col5 = st.columns(5)
-    col1.metric("Returned to owner", str(kpi_returned) + "%", help='KPI representing the percentage of animals returned to their owner.')
-    col2.metric("Adopted", str(kpi_adopted) + "%", help='KPI representing the percentage of animals that have been adopted.')
-    col3.metric("Transferred", str(kpi_transferred) + "%", help="KPI representing the percentage of animals transferred to another shelter." )
-    col4.metric("Euthanized", str(kpi_euthanized) + "%", help="KPI representing the percentage of animals that have been euthanized.")
-    col5.metric("Died", str(kpi_died) + "%", help="KPI representing the percentage of animals that have died while staying at the shelter.")
-
-    st.subheader('Sample Dataset')
-
-    st.write(results)
-
-with tab2:
 
     with st.form('ml_feat_values'):
         col1, col2 = st.columns(2)
@@ -160,4 +110,54 @@ with tab2:
         col1.metric('Predicted Outcome', prediction_string, help='Outcome predicted with Machine Learning, based on the values entered above.')
 
         col2.metric('Probability', prob_string, help='Probability of the predicted outcome for the animal.')    
+
+
+with tab2:
+    test = load_data('data/test.csv')
+    drop_columns = ['SexuponOutcome', 'AgeuponOutcome']
+    clean_data(test, drop_columns)
+    drop_extra_columns = ['ID', 'Name', 'DateTime', 'Breed', 'Color', 'age_category']
+
+
+    test_prepared = data_preparation(test, drop_extra_columns)
+
+    model = load('gbc_model.joblib')
+
+    predictions = model.predict(test_prepared)
+
+    results = test.copy()
+    results['OutcomeType'] = predictions
+
+    # Filters and Metric
+
+    col1, col2 = st.columns((2,1))
+    with col1:
+        animal_categories = results['AnimalType'].unique().tolist()
+        animal_selection = st.multiselect('Choose animal types', animal_categories, animal_categories, key='A')
+        results = results[results['AnimalType'].isin(animal_selection)]
+
+    with col2:
+        kpi_positive, kpi_returned, kpi_adopted, kpi_transferred, kpi_euthanized, kpi_died = calculate_metrics(results)
+
+        st.metric("Positive Outcomes", str(kpi_positive) + "%", help='KPI representing the percentage of positive outcomes (return to owner or adoption).')
+
+    # Plot Results
+
+    category_orders=dict(OutcomeType=['Return_to_owner', 'Adoption', 'Transfer', 'Euthanasia', 'Died'])
+    fig_predictions = px.histogram(results, x="OutcomeType", color='AnimalType', category_orders=category_orders)
+
+    st.write(fig_predictions)
+
+    # Metrics
+
+    col1, col2, col3, col4, col5 = st.columns(5)
+    col1.metric("Returned to owner", str(kpi_returned) + "%", help='KPI representing the percentage of animals returned to their owner.')
+    col2.metric("Adopted", str(kpi_adopted) + "%", help='KPI representing the percentage of animals that have been adopted.')
+    col3.metric("Transferred", str(kpi_transferred) + "%", help="KPI representing the percentage of animals transferred to another shelter." )
+    col4.metric("Euthanized", str(kpi_euthanized) + "%", help="KPI representing the percentage of animals that have been euthanized.")
+    col5.metric("Died", str(kpi_died) + "%", help="KPI representing the percentage of animals that have died while staying at the shelter.")
+
+    st.subheader('Sample Dataset')
+
+    st.write(results)
 
