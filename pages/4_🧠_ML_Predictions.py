@@ -14,8 +14,8 @@ with st.expander('About this Section'):
     will be for animals that arrive at the shelter. Predictions can be used to help
     the shelter devote their efforts to animals who need more help finding a new home
     and being adopted. For example, if an incoming animal is predicted to be transferred to
-    another shelter, rather than being adopted, then the shelter would know that is should
-    direct more of its efforts to finding a home for that particular animal, compared to an 
+    another shelter, then the shelter would know that it should
+    devote more of its efforts to finding a home for that particular animal, compared to an 
     animal that is predicted to be adopted.
     
     
