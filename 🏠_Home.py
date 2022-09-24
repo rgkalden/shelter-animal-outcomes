@@ -13,22 +13,28 @@ st.title("Shelter Animal Outcomes 🐾")
 with st.expander('About this Dashboard'):
     st.write('''
     
-    Welcome to the Shelter Animal Outcomes Dashboard!
+    Welcome to the Shelter Animal Outcomes Dashboard! This is an exploratory dashboard designed to help reveal 
+    patterns in animal outcomes through analytics and machine learning. The goal is to reveal insights into 
+    animal outcomes that can help the shelter focus on animals who may potentially need extra help finding a new home.
 
     There are several pages to this dashboard, each answering a certain question
     about data related to the outcomes of shelter animals.
 
     - 🏠 Home: What have been the outcomes in the past? (Descriptive Analytics)
     - 🔍 Diagnostic Analytics: What are the reasons for these outcomes?
-
     - 🧠 ML Predictions: What outcome is predicted to happen for a particular animal (Prescriptive Analytics)?
-    
+
     Hints:
 
     - Graphs are interactive. Feel free to hover your mouse for more information, or click and drag to zoom in.
         Tables are also interactive and can be sorted by clicking on column headers.
     - Pages can have data filters in the sidebar to the left, to further drill down by animal type or date range.
     - Additional Hints for more specific information are also provided on their respective pages.
+
+    Data Source:
+
+    Animal intake information from the Austin Animal Center, downloaded from Kaggle:
+    https://www.kaggle.com/competitions/shelter-animal-outcomes/overview
 
     ''')
 #     - 📈 Predictive Analytics: What will the outcomes be in the future?
