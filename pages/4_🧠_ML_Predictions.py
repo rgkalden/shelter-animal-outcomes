@@ -12,18 +12,23 @@ with st.expander('About this Section'):
     
     In this section, machine learning is used to predict what the outcome
     will be for animals that arrive at the shelter. There are two applications
-    of machine learning, that can be viewed in each tab below:
+    of machine learning, that can be viewed in the tabs below:
 
     - Single Animal Prediction: A form can be filled out with information for a single
       animal, and then a prediction for the outcome will be made.
     - Batch Prediction: For illustration purposes, predictions are made on a sample 
       batch of animals. Descriptive analytics for the overall outcomes are displayed.
+
+    In addition, further information is provided for machine learning model interpretability:
+    - Model Interpretation: In order to help interpret the outcomes of the model, the
+      relative importance of each feature when making a prediction with the model is 
+      displayed in a chart. 
     
     ''')
 
 
 
-tab1, tab2 = st.tabs([ 'Single Animal Prediction', 'Batch Prediction'])
+tab1, tab2, tab3 = st.tabs([ 'Single Animal Prediction', 'Batch Prediction', 'Model Interpretation'])
 
 with tab1:
 
@@ -161,3 +166,8 @@ with tab2:
 
     st.write(results)
 
+with tab3:
+
+    feat_importances = pd.read_csv('feat_importances.csv')
+    importances_chart = px.bar(feat_importances, x='feature_name', y='importance')
+    st.write(importances_chart)
