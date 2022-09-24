@@ -83,8 +83,13 @@ col3.metric("Transferred", str(kpi_transferred) + "%", help="KPI representing th
 col4.metric("Euthanized", str(kpi_euthanized) + "%", help="KPI representing the percentage of animals that have been euthanized.")
 col5.metric("Died", str(kpi_died) + "%", help="KPI representing the percentage of animals that have died while staying at the shelter.")
 
-st.subheader('Dataset')
-st.write(train)
+# Display Dataset
+
+display_data = st.sidebar.checkbox('Display Data')
+
+if display_data == True:
+    st.subheader('Dataset')
+    st.write(train)
 
 
 
