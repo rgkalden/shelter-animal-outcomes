@@ -11,8 +11,15 @@ with st.expander('About this Section'):
     st.write('''
     
     In this section, machine learning is used to predict what the outcome
-    will be for animals that arrive at the shelter. There are two applications
-    of machine learning, that can be viewed in the tabs below:
+    will be for animals that arrive at the shelter. Predictions can be used to help
+    the shelter devote their efforts to animals who need more help finding a new home
+    and being adopted. For example, if an incoming animal is predicted to be transferred to
+    another shelter, rather than being adopted, then the shelter would know that is should
+    direct more of its efforts to finding a home for that particular animal, compared to an 
+    animal that is predicted to be adopted.
+    
+    
+    There are two applications of machine learning that can be viewed in the tabs below:
 
     - Single Animal Prediction: A form can be filled out with information for a single
       animal, and then a prediction for the outcome will be made.
@@ -171,3 +178,16 @@ with tab3:
     feat_importances = pd.read_csv('feat_importances.csv')
     importances_chart = px.bar(feat_importances, x='feature_name', y='importance')
     st.write(importances_chart)
+
+    st.info('''
+    
+    When making a prediction with the machine learning model, the features that are the most important are:
+    - Age in years (age_years)
+    - If the animal has been neutered/spayed (neutered_neutered)
+    - If the animal is a Dog or a Cat (AnimalType_Dog)
+    - Month
+    - If the animal is of a single color or not (color_single)
+    - If the animal is male or female (sex_male)
+    - If the animal is a mixed breed or not (breed_mix)
+
+    ''')
