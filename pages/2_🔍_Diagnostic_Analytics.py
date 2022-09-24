@@ -9,9 +9,12 @@ st.title('Diagnostic Analytics')
 with st.expander('About this Section'):
     st.write('''
     
-    In this section, data is presented in order to reveal any patterns in
-    animal outcomes. Features of the data are shown to explore whether
-    or not they influence the type of outcome.    
+    This section is all about diagnostic analytics. Features of the data are presented so that
+    patterns that influence animal outcomes can be discovered.   
+
+    Hints:
+    - Filters in the sidebar can be used to further drill down by date and animal type. Give them a try!
+    - Charts exploring the features of the data can be viewed by selecting the corresponding tab below.
     
     ''')
 
