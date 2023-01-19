@@ -1,6 +1,8 @@
 numpy
 pandas
-sklearn
+#sklearn
+# error, package name deprecated, use scikit-learn. 1/18/23
+scikit-learn
 imblearn
 streamlit
 plotly
